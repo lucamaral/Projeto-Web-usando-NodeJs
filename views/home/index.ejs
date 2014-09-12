@@ -1,0 +1,15 @@
+<% include ../header %>
+    <header>
+        <h1> NTalk </h1>
+        <h4> Bem vindo ! </h4>
+    </header>
+    <section>
+        <form action="/entrar" method="post">
+            <input type="text" name="usuario[name]" placeholder="Nome" value="lucas">
+            <br>
+            <input type="email" name="usuario[email]" placeholder="E-mail" value="lucas@lucas.com">
+            <br>
+            <button type="submit">Entrar</button>
+        </form>
+    </section>
+    <% include ../footer %>
