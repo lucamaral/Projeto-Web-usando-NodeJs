@@ -1,52 +1,71 @@
 module.exports = function (app) {
+    var Usuario = app.models.usuario;
+
     var ContatosController = {
         index: function (request, response) {
-            var usuario = request.session.usuario;
-            var contatos = usuario.contatos;
-            var params = {
-                "usuario": usuario,
-                "contatos": contatos
-            };
-            response.render("contatos/index", params);
+            var _id = request.session.usuario._id;
+            Usuario.findById(_id, function (erro, usuario) {
+                var contatos = usuario.contatos;
+                var resultado = {
+                    contatos: contatos
+                };
+                response.render("contatos/index", resultado);
+            });
         },
         create: function (request, response) {
-            var contato = request.body.contato;
-            var usuario = request.session.usuario;
-            usuario.contatos.push(contato);
-            response.redirect("/contatos");
+            var _id = request.session.usuario._id;
+            Usuario.findById(_id, function (erro, usuario) {
+                var contato = request.body.contato;
+                var contatos = usuario.contatos;
+                contatos.push(contato);
+                usuario.save(function () {
+                    response.redirect("/contatos");
+                });
+            });
         },
         show: function (request, response) {
-            var id = request.params.id;
-            var contato = request.session.usuario.contatos[id];
-            var params = {
-                contato: contato,
-                id: id
-            };
-            response.render("contatos/show", params);
+            var _id = request.session.usuario._id;
+            Usuario.findById(_id, function (erro, usuario) {
+                var contatoID = request.params.id;
+                var contato = usuario.contatos.id(contatoID);
+                var resultado = {
+                    contato: contato
+                };
+                response.render("contatos/show", resultado);
+            });
         },
         edit: function (request, response) {
-            var id = request.params.id;
-            var usuario = request.session.usuario;
-            var contato = usuario.contatos[id];
-            var params = {
-                usuario: usuario,
-                contato: contato,
-                id: id
-            };
-            console.info(params);
-            response.render("contatos/edit", params);
+            var _id = request.session.usuario._id;
+            Usuario.findById(_id, function (erro, usuario) {
+                var contatoID = request.params.id;
+                var contato = usuario.contatos.id(contatoID);
+                var resultado = {
+                    contato: contato
+                };
+                response.render("contatos/edit", resultado);
+            });
         },
         update: function (request, response) {
-            var contato = request.body.contato;
-            var usuario = request.session.usuario;
-            usuario.contatos[request.params.id] = contato;
-            response.redirect("/contatos");
+            var _id = request.session.usuario._id;
+            Usuario.findById(_id, function (erro, usuario) {
+                var contatoID = request.params.id;
+                var contato = usuario.contatos.id(contatoID);
+                contato.name = request.body.contato.name;
+                contato.email = request.body.contato.email;
+                usuario.save(function () {
+                    response.redirect("/contatos");
+                });
+            });
         },
         destroy: function (request, response) {
-            var usuario = request.session.usuario;
-            var id = request.params.id;
-            usuario.contatos.splice(id, 1);
-            response.redirect("/contatos");
+            var _id = request.session.usuario._id;
+            Usuario.findById(_id, function (erro, usuario) {
+                var contatoID = request.params.id;
+                usuario.contatos.id(contatoID).remove();
+                usuario.save(function () {
+                    response.redirect("/contatos");
+                });
+            });
         }
     };
     return ContatosController;

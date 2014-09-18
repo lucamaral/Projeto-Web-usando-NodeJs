@@ -11,6 +11,7 @@
     "express-load": "^1.1.14",
     "express-session": "^1.8.1",
     "method-override": "^2.2.0",
+    "mongoose": "^3.8.16",
     "socket.io": "^1.1.0"
   }
 }
