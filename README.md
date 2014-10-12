@@ -9,21 +9,21 @@ Projeto-Web-usando-NodeJs
 Clonando o repositório:
 
 <code>
-  git clone git@github.com:lucamaral/Projeto-Web-usando-NodeJs.git
+  git clone git@github.com:lucamaral/demo-with-nodejs.git
 </code>
 
 ou
 
 Fazendo download do projeto:
 
-<a href="https://github.com/lucamaral/Projeto-Web-usando-NodeJs/archive/master.zip"> Download aqui... </a>
+<a href="https://github.com/lucamaral/demo-with-nodejs/archive/master.zip"> Download aqui... </a>
 
 Extrair o arquivo.
 
 <h2> Rodando a aplicação </h2>
 
 Abrir diretorio da pasta raiz.
-"Projeto-Web-usando-NodeJs"
+"demo-with-nodejs"
 
 Abrir o prompt de comando.
 executar:
